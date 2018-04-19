@@ -2,7 +2,8 @@
 Easy XlsxWriter : Wrapper around xlsxwriter module in python
 
 xlsxwriter spreadsheet class doesn't have its own pointer giving rise to this project.
-Easy Xlsxwriter aims to provide access to spreadsheets along with a pointer so that more can be done in less. 
+Easy Xlsxwriter aims to provide access to spreadsheets along with a pointer so that more can be done in less.
+And Python Loops can be kept clean
 
 
 # Note
