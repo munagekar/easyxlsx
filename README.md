@@ -8,11 +8,12 @@ And Python Loops can be kept clean
 
 # Note
 
-Most features of xlsxwriter will not be supported by this wrapper. If you want flexiblity stick the original library.
+Most features of xlsxwriter will not be supported by this wrapper. If you want flexiblity stick with the original library which is quite great a feat by itself.
 
 # Design Principles
 - Limit exposure to xlsxwriter
 - Provide File Pointer like control over Worksheets
+- Simply Trivial Tasks
 - Code : Python PEP 8
 - Highly reusable for basic tasks.
 
