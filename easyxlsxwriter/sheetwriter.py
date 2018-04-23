@@ -50,12 +50,10 @@ class SheetWriter:
         self.newline()
         self._pointer.v_jump(height - 1)
 
+    # Writes a table. Data is list of list in either row or column orientation
+    # Heading is handled by merging cells
     def writetable(self, heading, data, orientation='row'):
         assert(orientation in ['row', 'col']), "Orientation should be row/col"
-        print "Got Heading"
-        print heading
-        print "Got Data"
-        print data
         if heading is not None:
             width = 0
             if orientation == 'row':
@@ -75,34 +73,33 @@ class SheetWriter:
 
     # Data for each heading is given in a row
     # Writes a Table to Excel given the Data and Sheetname
+    # Also a draws a graph for the same
     '''
     Write to Excel
     H1  H2  H3
     D00 D10 D20
     D10 D11 D21
 
-    Eg:
-    headings = ['Number', 'Batch 1', 'Batch 2']
-    data = [
-    [2, 3, 4, 5, 6, 7], --under Number
-    [10, 40, 50, 20, 10, 50],--under Batch1
-    [30, 60, 70, 50, 40, 30],--under Batch2
-    ]
     '''
 
     # Write the data into a table and return a chart
     # The Pointer Logic Inside this is cryptic, I couldn't write cleaner code
     # Hopefully you would never have to bother tweaking this code
-    def line_graph(self, headings, data, title, xaxis, yaxis):
+    # Xdata is a list of the data along x-axis along with its headings
+    # Xdata = H1,DOO,D10
+    # Ydata is a list of lists of data along y-axis along with its headings
+    # Ydata = [[H2,D10,D11],[H3,D20,D21]]
+    def line_graph(self, xdata, ydatas, title, xaxis, yaxis):
+        assert (all(len(y) == len(xdata)
+                    for y in ydatas)), 'Length Mismatch in Col Len'
         chart = self._workbook.add_chart({'type': 'line'})
         # Chart Data Pointer: Points to the begining of the chart
         cd_pointer = deepcopy(self.get_pointer())
         cd_pointer.newline()
         # Where the graph will be drawn
-        graph_cell = deepcopy(self.get_pointer()).h_jump_cal(len(headings))
-
-        # Add the headings to the columns
-        data = [[h] + d for h, d in zip(headings, data)]
+        graph_cell = deepcopy(self.get_pointer()).h_jump_cal(1 + len(ydatas))
+        # Combine the data so that writetable could be called
+        data = [xdata] + ydatas
         self.writetable(title, data, orientation='col')
         # Deal with Categories
         cd_pointer.newline()  # Go to line after chart title
