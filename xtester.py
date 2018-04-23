@@ -17,22 +17,23 @@ data1 = [5, 35]  # Network Output = y1
 data2 = [2, 4]  # Netowrk Input	= y2
 data = [data0, data1, data2]
 
+# Drawing a Graph
+
+xaxisdata = ['Category', 'RedPSNR', 'BluePSNR', 'GreenPSNR']
+Yaxisdata1 = ['Simple Method', 5, 6, 7]
+Yaxisdata2 = ['Advanced Method', 50, 10, 15]
+ydatas = [Yaxisdata1, Yaxisdata2]
+
 title = 'testgraph'
 worksheetname = 'testsheet'
-xaxis = '10mul'
-yaxis = 'numeric'
-'''
-easyx.addworksheet('testsheet')
-easyx.line_graph(headings, data, 'testsheet', title, xaxis, yaxis)
-easyx.line_graph(headings, data, 'testsheet', title, xaxis, yaxis)
-easyx.close()
-'''
+xaxis = 'PSNRTypes'
+yaxis = 'Gains'
 
 bookname = 'testbook.xlsx'
 assert (extension_chk(bookname, 'xlsx') is True), 'Invalid extension'
 book = xlsxwriter.Workbook(bookname)
 writer = SheetWriter(book, 'NewSheet')
 writer.writetable('head', data, orientation='col')
-writer.line_graph(headings, data, title, xaxis, yaxis)
+writer.line_graph(xaxisdata, ydatas, title, xaxis, yaxis)
 writer.writetable('head', data, orientation='col')
 book.close()
