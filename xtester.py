@@ -5,10 +5,9 @@ This is a sample scipt demonstrating using of easyxlsxwriter
 Which aims at keeping your python loops clean
 by provinding python style access to an excel sheet
 '''
-
-import xlsxwriter
 from easyxlsxwriter.misc import extension_chk
 from easyxlsxwriter.sheetwriter import SheetWriter
+from easyxlsxwriter.shorcuts import newbook
 
 
 headings = ['category', 'net', 'inp']
@@ -31,7 +30,7 @@ yaxis = 'Gains'
 
 bookname = 'testbook.xlsx'
 assert (extension_chk(bookname, 'xlsx') is True), 'Invalid extension'
-book = xlsxwriter.Workbook(bookname)
+book = newbook(bookname)
 writer = SheetWriter(book, 'NewSheet')
 writer.writetable('head', data, orientation='col')
 writer.line_graph(xaxisdata, ydatas, title, xaxis, yaxis)
