@@ -8,7 +8,14 @@ It provides a simpler interface to both xlsxwriter & openpxl importing both of t
 
 # Note
 
-Most features of xlsxwriter & openpyxl will not be supported by this wrapper. If you want flexiblity stick with the original libraries which is quite great a feat by itself.
+Most features of xlsxwriter & openpyxl will not be supported by this wrapper. If you want flexiblity stick with the original libraries which is quite great themselves. Anything that becomes complicated is straight away reimplemented. Example table writer is rewritten and doesn't match with that of xlsxwriter. 
+
+# Limitations
+
+- Xlsxwriter doesn't support does support appending to existing files , neither is is supported by this wrapper
+- Openpyxl is currently used only reading.
+- Don't read and write at the same time. It simply won't work. Different modules at the backend.
+- Future Work would try to eliminate these limitations.
 
 # Design Principles
 - Limit exposure to xlsxwriter & openpyxl
